@@ -1,0 +1,163 @@
+/* ── CSS Variables ───────────────────────────────────── */
+.dark {
+  --bg: #0a0a0f;
+  --bg2: #111118;
+  --bg3: #1a1a24;
+  --surface: #1e1e2e;
+  --border: #2a2a3a;
+  --accent: #6c63ff;
+  --accent2: #00d4aa;
+  --accent3: #ff6b6b;
+  --text: #e8e8f0;
+  --text2: #a0a0b8;
+  --text3: #6a6a80;
+  --card: #16161f;
+  --glow: rgba(108, 99, 255, 0.15);
+  --shadow: 0 4px 24px rgba(0, 0, 0, 0.4);
+}
+
+.light {
+  --bg: #f4f4f8;
+  --bg2: #eaeaf0;
+  --bg3: #e0e0ea;
+  --surface: #ffffff;
+  --border: #d0d0e0;
+  --accent: #5048e5;
+  --accent2: #00a882;
+  --accent3: #e05252;
+  --text: #1a1a2e;
+  --text2: #4a4a68;
+  --text3: #8a8aa0;
+  --card: #ffffff;
+  --glow: rgba(80, 72, 229, 0.08);
+  --shadow: 0 4px 24px rgba(0, 0, 0, 0.08);
+}
+
+/* ── App Shell ───────────────────────────────────────── */
+.app {
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+  transition: background 0.3s ease, color 0.3s ease;
+}
+
+/* ── Shared Section Styles ───────────────────────────── */
+.section {
+  padding: 6rem 0;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding-left: 3rem;
+  padding-right: 3rem;
+}
+
+.section-tag {
+  font-size: 0.7rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: var(--accent);
+  font-family: 'DM Mono', monospace;
+  margin-bottom: 0.75rem;
+}
+
+.section-title {
+  font-size: clamp(1.8rem, 3vw, 2.5rem);
+  font-weight: 700;
+  letter-spacing: -1px;
+  margin-bottom: 1rem;
+  color: var(--text);
+  line-height: 1.15;
+}
+
+.section-title .accent {
+  color: var(--accent);
+}
+
+.section-title .accent2 {
+  color: var(--accent2);
+}
+
+.section-divider {
+  width: 48px;
+  height: 3px;
+  background: linear-gradient(90deg, var(--accent), var(--accent2));
+  border-radius: 2px;
+  margin-bottom: 3rem;
+}
+
+/* ── Buttons ─────────────────────────────────────────── */
+.btn-primary {
+  display: inline-block;
+  background: linear-gradient(135deg, var(--accent), #8b80ff);
+  color: #fff;
+  padding: 12px 28px;
+  border-radius: 30px;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 0.9rem;
+  transition: transform 0.2s, box-shadow 0.2s;
+  box-shadow: 0 4px 20px rgba(108, 99, 255, 0.3);
+  font-family: 'Space Grotesk', sans-serif;
+  border: none;
+  cursor: pointer;
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 30px rgba(108, 99, 255, 0.4);
+}
+
+.btn-outline {
+  display: inline-block;
+  border: 1px solid var(--border);
+  color: var(--text);
+  padding: 12px 28px;
+  border-radius: 30px;
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 0.9rem;
+  background: var(--surface);
+  transition: border-color 0.2s, transform 0.2s;
+  font-family: 'Space Grotesk', sans-serif;
+  cursor: pointer;
+}
+
+.btn-outline:hover {
+  border-color: var(--accent2);
+  transform: translateY(-2px);
+}
+
+/* ── Fade-in Animation ───────────────────────────────── */
+.fade-in {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 0.65s ease, transform 0.65s ease;
+}
+
+.fade-in.visible {
+  opacity: 1;
+  transform: none;
+}
+
+.fade-in.delay-1 { transition-delay: 0.1s; }
+.fade-in.delay-2 { transition-delay: 0.2s; }
+.fade-in.delay-3 { transition-delay: 0.3s; }
+
+/* ── Pulse Keyframe ──────────────────────────────────── */
+@keyframes pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50%       { opacity: 0.5; transform: scale(0.8); }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50%       { transform: translateY(-8px); }
+}
+
+/* ── Responsive ──────────────────────────────────────── */
+@media (max-width: 768px) {
+  .section {
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+  }
+}
