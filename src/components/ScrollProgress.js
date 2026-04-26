@@ -1,28 +1,22 @@
 import React, { useState, useEffect } from 'react';
 
 export default function ScrollProgress() {
-  const [width, setWidth] = useState(0);
-
+  const [w, setW] = useState(0);
   useEffect(() => {
-    const handleScroll = () => {
-      const scrollTop = window.scrollY;
-      const docHeight = document.body.scrollHeight - window.innerHeight;
-      setWidth(docHeight > 0 ? (scrollTop / docHeight) * 100 : 0);
+    const fn = () => {
+      const max = document.body.scrollHeight - window.innerHeight;
+      setW(max > 0 ? (window.scrollY / max) * 100 : 0);
     };
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => window.removeEventListener('scroll', handleScroll);
+    window.addEventListener('scroll', fn, { passive: true });
+    return () => window.removeEventListener('scroll', fn);
   }, []);
 
   return (
     <div style={{
-      position: 'fixed',
-      top: 0,
-      left: 0,
-      height: '2px',
-      width: `${width}%`,
-      background: 'linear-gradient(90deg, var(--accent), var(--accent2))',
-      zIndex: 9999,
-      transition: 'width 0.1s linear',
+      position: 'fixed', top: 0, left: 0, height: '2px',
+      width: `${w}%`, background: 'var(--accent)',
+      zIndex: 9999, transition: 'width .1s linear',
+      borderRadius: '0 2px 2px 0',
     }} />
   );
 }

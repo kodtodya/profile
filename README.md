@@ -1,13 +1,13 @@
 # Avadhut Lele — Portfolio
 
-Personal portfolio website for Avadhut Lele, Solutions Architect & Middleware Integration Developer based in Pune, India.
+Personal portfolio website for Avadhut Lele, Solutions Architect & Middleware Integration Developer.
 
-Built with React and deployed via GitHub Pages.
+Styled after [chanmeng.org](https://chanmeng.org) — clean card-based layout, bento grid hero, typewriter animation, light/dark mode.
 
-## Tech Stack
+## Stack
 - React 18
-- CSS Variables (dark/light theme)
-- Google Fonts (Space Grotesk + DM Mono)
+- CSS Variables (light/dark theme)
+- Google Fonts: Inter + JetBrains Mono
 - gh-pages for deployment
 
 ## Local Development
@@ -17,7 +17,7 @@ npm install
 npm start
 ```
 
-Open [http://localhost:3000](http://localhost:3000)
+Opens at [http://localhost:3000](http://localhost:3000)
 
 ## Deploy to GitHub Pages
 
@@ -25,25 +25,25 @@ Open [http://localhost:3000](http://localhost:3000)
 npm run deploy
 ```
 
-This runs `npm run build` then pushes `build/` to the `gh-pages` branch automatically.
+Builds and pushes to the `gh-pages` branch automatically.
 
-## Structure
+## File Structure
 
 ```
 src/
   components/
-    Nav.js / Nav.css
-    Hero.js / Hero.css
-    About.js / About.css
-    Skills.js / Skills.css
-    Experience.js / Experience.css
-    Education.js / Education.css
-    Blog.js / Blog.css
-    HireMe.js / HireMe.css
-    Footer.js / Footer.css
-    ScrollProgress.js
+    Nav.js / Nav.css           — Fixed top nav + mobile drawer
+    Hero.js / Hero.css         — Bento grid hero + typewriter
+    About.js / About.css       — Two-column about section
+    Experience.js / Exp.css    — Accordion timeline
+    Skills.js / Skills.css     — Bento grid skill cards
+    Education.js / Edu.css     — Education cards
+    Blog.js / Blog.css         — Blog post cards
+    HireMe.js / HireMe.css     — Offerings + contact form
+    Footer.js / Footer.css     — Clean footer
+    ScrollProgress.js          — Top scroll progress bar
   hooks/
-    useScrollReveal.js
-  App.js / App.css
-  index.js / index.css
+    useScrollReveal.js         — IntersectionObserver reveal
+  App.js / App.css             — Theme, layout, design tokens
+  index.js / index.css         — Entry point + reset
 ```

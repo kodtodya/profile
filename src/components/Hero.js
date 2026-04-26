@@ -1,86 +1,137 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import './Hero.css';
 
-const stats = [
-  { num: '10+', label: 'Years in IT' },
-  { num: '5',   label: 'Companies' },
-  { num: '20+', label: 'Technologies' },
-  { num: 'OSS', label: 'Advocate' },
+const WORDS = [
+  'Solutions Architect',
+  'Integration Developer',
+  'AI RAG Developer',
+  'Apache Camel Expert',
+  'Kafka Enthusiast',
+  'Open Source Advocate',
+  'Middleware Specialist',
+  'Music Lover',
+  'Minimalist',
+  'Investor'
 ];
 
-
-const connect = [
-  {
-    icon: '🚀',
-    name: 'GitHub',
-    url: 'https://github.com/kodtodya',
-  },
-  {
-    icon: 'x',
-    name: 'X',
-    url: 'https://x.com/kodtodya',
-  }
+const STATS = [
+  { value: '14+', label: 'Years Experience' },
+  { value: '6',   label: 'Companies' },
+  { value: '20+', label: 'Technologies' },
+  { value: '∞',   label: 'Coffee Cups' },
 ];
 
 export default function Hero() {
-  const contentRef = useRef(null);
+  const [wordIdx, setWordIdx] = useState(0);
+  const [displayed, setDisplayed] = useState('');
+  const [deleting, setDeleting] = useState(false);
+  const [charIdx, setCharIdx] = useState(0);
 
   useEffect(() => {
-    const el = contentRef.current;
-    if (el) {
-      setTimeout(() => el.classList.add('hero-visible'), 100);
+    const current = WORDS[wordIdx];
+    let timeout;
+    if (!deleting && charIdx < current.length) {
+      timeout = setTimeout(() => {
+        setDisplayed(current.slice(0, charIdx + 1));
+        setCharIdx(c => c + 1);
+      }, 65);
+    } else if (!deleting && charIdx === current.length) {
+      timeout = setTimeout(() => setDeleting(true), 2000);
+    } else if (deleting && charIdx > 0) {
+      timeout = setTimeout(() => {
+        setDisplayed(current.slice(0, charIdx - 1));
+        setCharIdx(c => c - 1);
+      }, 35);
+    } else if (deleting && charIdx === 0) {
+      setDeleting(false);
+      setWordIdx(i => (i + 1) % WORDS.length);
     }
-  }, []);
+    return () => clearTimeout(timeout);
+  }, [charIdx, deleting, wordIdx]);
 
   return (
     <section id="hero" className="hero">
-      <div className="hero-bg" aria-hidden="true">
-        <div className="hero-orb hero-orb--1" />
-        <div className="hero-orb hero-orb--2" />
-        <div className="hero-grid" />
-      </div>
+      <div className="hero-inner">
 
-      <div className="hero-content" ref={contentRef}>
-        <div className="hero-chip">
-          <span className="chip-dot" />
-          Available for Opportunities
+        {/* ── Left: Text ── */}
+        <div className="hero-text">
+          <div className="hero-available">
+            <span className="hero-dot" />
+            Available for opportunities
+          </div>
+
+          <h1 className="hero-name">
+            Avadhut<br />Lele
+          </h1>
+
+          <div className="hero-typewriter">
+            <span className="hero-typed">{displayed}</span>
+            <span className="hero-cursor">|</span>
+          </div>
+
+          <p className="hero-desc">
+            14+ years crafting resilient middleware integration systems and
+            cloud-native architectures. Empowering organisations through open-source
+            technology — from Apache Camel routes to Kubernetes deployments.
+          </p>
+
+          <div className="hero-cta-row">
+            <a href="#hire" className="hero-btn-primary">Get in touch</a>
+            <a href="#experience" className="hero-btn-secondary">View work</a>
+          </div>
         </div>
 
-        <h1 className="hero-name">
-          Avadhut<br />
-          <span className="hero-name--accent">Lele</span>
-        </h1>
+        {/* ── Right: Bento grid ── */}
+        <div className="hero-bento">
 
-        <div className="hero-title">
-          <span className="hero-title-prefix">// </span>
-          Solutions Architect &amp; Integration Developer
-        </div>
+          {/* Location card */}
+          <div className="bento-card bento-location">
+            <span className="bento-icon">📍</span>
+            <div>
+              <div className="bento-title">Pune, India</div>
+              <div className="bento-sub">Most livable city</div>
+            </div>
+          </div>
 
-        <p className="hero-desc">
-          Crafting resilient middleware integration systems and cloud-native architectures
-          with 10+ years of experience. Based in Pune, India — empowering organisations
-          through open-source technology.
-        </p>
+          {/* Stack card */}
+          <div className="bento-card bento-stack">
+            <div className="bento-label">Core Stack</div>
+            <div className="bento-chips">
+              {['Java', 'GoLang', 'Python', 'Camel', 'Spring Boot', 'Kafka', 'React', 'OpenShift'].map(t => (
+                <span key={t} className="bento-chip">{t}</span>
+              ))}
+            </div>
+          </div>
 
-        <div className="hero-actions">
-          <a href="#hire" className="btn-primary">Let's Build Together</a>
-          <a href="#experience" className="btn-outline">View Experience</a>
-        </div>
+          {/* Status card */}
+          <div className="bento-card bento-status">
+            <div className="status-dot-wrap">
+              <span className="status-dot" />
+              <span className="status-dot status-dot--ring" />
+            </div>
+            <div className="bento-title">Open to Work</div>
+            <div className="bento-sub">Consulting & Full-time</div>
+          </div>
 
-        <div className="hero-stats">
-          {stats.map((s) => (
-            <div className="stat" key={s.label}>
-              <div className="stat-num">{s.num}</div>
-              <div className="stat-label">{s.label}</div>
+          {/* Stats */}
+          {STATS.map(s => (
+            <div key={s.label} className="bento-card bento-stat">
+              <div className="bento-stat-num">{s.value}</div>
+              <div className="bento-stat-label">{s.label}</div>
             </div>
           ))}
+
+          {/* OSS card */}
+          <div className="bento-card bento-oss">
+            <span className="bento-icon">⚡</span>
+            <div>
+              <div className="bento-title">Open Source</div>
+              <div className="bento-sub">Architect & Advocate</div>
+            </div>
+          </div>
         </div>
 
       </div>
-
-      <a href="#about" className="hero-scroll-hint" aria-label="Scroll to About">
-        <span />
-      </a>
     </section>
   );
 }

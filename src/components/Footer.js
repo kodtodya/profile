@@ -1,25 +1,25 @@
 import React from 'react';
 import './Footer.css';
 
-const socials = [
-  { label: 'GitHub', href: 'https://github.com/kodtodya' },
-  { label: 'Portfolio', href: 'https://kodtodya.github.io' },
-];
-
 export default function Footer() {
   return (
     <footer className="footer">
       <div className="footer-inner">
-        <div className="footer-logo">kodtodya</div>
-        <div className="footer-links">
-          {socials.map((s) => (
-            <a key={s.label} href={s.href} target="_blank" rel="noreferrer">
-              {s.label}
-            </a>
-          ))}
+        <div className="footer-left">
+          <div className="footer-logo">
+            <span className="footer-logo-badge">AL</span>
+            <span className="footer-logo-text">Avadhut Lele</span>
+          </div>
+          <p className="footer-tagline">Solutions Architect · Middleware Integration · Open Source</p>
         </div>
-        <p className="footer-copy">© {new Date().getFullYear()} Avadhut Lele — Crafted with ☕ in Pune, India</p>
-        <p className="footer-sub">Solutions Architect · Middleware Integration · Open Source Advocate</p>
+
+        <div className="footer-links">
+          <a href="https://github.com/kodtodya" target="_blank" rel="noreferrer">GitHub</a>
+          <a href="https://kodtodya.github.io" target="_blank" rel="noreferrer">Portfolio</a>
+          <a href="#hire">Contact</a>
+        </div>
+
+        <p className="footer-copy">© {new Date().getFullYear()} Avadhut Lele · Made with ☕ in Pune, India</p>
       </div>
     </footer>
   );
